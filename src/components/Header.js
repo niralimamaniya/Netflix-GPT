@@ -1,20 +1,46 @@
-import {signOut} from 'firebase/auth';
+import {onAuthStateChanged, signOut} from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { addUser, removeUser } from '../utils/userSlice';
 
 const Header = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const user = useSelector((store) => store.user);
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            navigate("/");
           }).catch((error) => {
             // An error happened.
           });
     }
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed up / signed in
+                const {uid, email , displayName, photoURL} = user;
+                dispatch(
+                    addUser({
+                        uid:uid,
+                        email:email,
+                        displayName:displayName,
+                        photoURL:photoURL
+                    })
+                )
+                navigate("/browse");
+            } else {
+                // User is signed out
+                dispatch(removeUser());   
+                navigate("/login");
+            }
+          });
+    },[]);
+
     return (
         <div className='flex justify-between items-center mx-4'>
             <div className="">
