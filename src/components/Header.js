@@ -7,6 +7,8 @@ import { addUser, removeUser } from '../utils/userSlice';
 import { NETFLIX_LOGO } from '../utils/constants';
 import { IoSearchOutline } from "react-icons/io5";
 import { toggleGptSearch } from '../utils/gptSlice';
+import { SUPPORTED_LANG } from '../utils/constants';
+import { changeLanguage } from '../utils/langSlice';
 
 const Header = () => {
 
@@ -14,6 +16,8 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const user = useSelector((store) => store.user);
+    const showGptSearch = useSelector((store) => store?.gpt.showGptSearch);
+
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -25,6 +29,10 @@ const Header = () => {
     const handleGptSearchClick = () => {
         // Toggle
         dispatch(toggleGptSearch());
+    }
+
+    const handleLanguageChange = (e) => {
+        dispatch(changeLanguage(e.target.value));
     }
 
     useEffect(()=>{
@@ -63,13 +71,30 @@ const Header = () => {
             </div>
             {user && 
             <div className='flex gap-3'>
+                {showGptSearch && 
+                <div className='flex justify-center items-center'>
+                    <select 
+                        className='py-1 px-2 focus:outline-none rounded-sm'
+                        onChange={handleLanguageChange}
+                    >
+                        { 
+                            SUPPORTED_LANG.map((lang) => 
+                                <option 
+                                    key={lang.identifier} 
+                                    value={lang.identifier} 
+                                >{lang.name}
+                                </option> 
+                            )
+                        }
+                    </select>
+                </div>}
                 <div className='flex justify-center items-center gap-3 text-white px-2 hover:opacity-80'>
-                    <IoSearchOutline className='w-6 h-6'/>
+                    {showGptSearch ? "" : <IoSearchOutline className='w-6 h-6'/> }
                     <button 
                         className='font-semibold'
                         onClick={handleGptSearchClick}
                     >
-                        Search
+                        {showGptSearch ? "Homepage" : "Search"}
                     </button>
                 </div>
                 <img 

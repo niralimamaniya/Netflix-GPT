@@ -19,3 +19,18 @@ export const TOP_RATED_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/top_
 export const UPCOMING_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/upcoming?&page=1";
 
 export const MOVIE_IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const SUPPORTED_LANG = [
+  {
+    identifier:"en",
+    name:"English",
+  },
+  {
+    identifier:"hindi",
+    name:"Hindi",
+  },
+  {
+    identifier:"marathi",
+    name:"Marathi",
+  },
+]

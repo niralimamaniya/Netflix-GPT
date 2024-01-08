@@ -1,6 +1,11 @@
 import { IoSearchOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import lang from "../utils/languageConstants";
 
 const SearchBar = () => {
+
+    const langKey = useSelector((store) => store?.language.lang);
+
     return (
         <div className="pt-[12%] mx-28">
                 <div className="text-center">
@@ -11,9 +16,9 @@ const SearchBar = () => {
                     <input 
                         className="py-4 px-5 col-span-11 rounded-md bg-zinc-700 text-white focus:outline-none focus:text-white"
                         type="text"
-                        placeholder="Search Movies, Shows and more"
+                        placeholder={lang[langKey].gptSearchPlaceholder}
                     />
-                    <button className="bg-red-600 text-white py-2 px-4 rounded-md font-semibold cursor-pointer">Search</button>
+                    <button className="bg-red-600 text-white py-2 px-4 rounded-md font-semibold cursor-pointer">{lang[langKey].search}</button>
                 </form>
                 <p className='text-xs mt-1 text-gray-400'>
                     Note: Movie recommendations powered by GPT are available on request due to paid APIs.
