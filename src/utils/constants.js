@@ -9,7 +9,7 @@ export const API_OPTIONS = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZjdlNWY0NjBkNDA0Y2FmNjJmNDY5YjU2Y2IwNWY5ZSIsInN1YiI6IjY1OWE5YTVkN2Q1NTA0MDIwMzBiMmQ0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ermfQFXwltdnuiqylLt9LoW7CcM_4rY5VKhcMvrYH10'
+      Authorization: 'Bearer'+process.env.REACT_APP_TMDB_KEY,
     }
 };
 
@@ -34,3 +34,5 @@ export const SUPPORTED_LANG = [
     name:"Marathi",
   },
 ]
+
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;

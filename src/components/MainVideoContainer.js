@@ -9,7 +9,6 @@ const MainVideoContainer = () => {
     if(!movies) return;
 
     const mainMovie = movies[0];
-    console.log(mainMovie);
 
     const {original_title, overview , id, poster_path } = mainMovie;
 
