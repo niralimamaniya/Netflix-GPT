@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
 import { NETFLIX_LOGO } from '../utils/constants';
+import { IoSearchOutline } from "react-icons/io5";
+import { toggleGptSearch } from '../utils/gptSlice';
 
 const Header = () => {
 
@@ -18,6 +20,11 @@ const Header = () => {
           }).catch((error) => {
             // An error happened.
           });
+    }
+
+    const handleGptSearchClick = () => {
+        // Toggle
+        dispatch(toggleGptSearch());
     }
 
     useEffect(()=>{
@@ -56,6 +63,15 @@ const Header = () => {
             </div>
             {user && 
             <div className='flex gap-3'>
+                <div className='flex justify-center items-center gap-3 text-white px-2 hover:opacity-80'>
+                    <IoSearchOutline className='w-6 h-6'/>
+                    <button 
+                        className='font-semibold'
+                        onClick={handleGptSearchClick}
+                    >
+                        Search
+                    </button>
+                </div>
                 <img 
                     className='w-9 h-9 rounded-sm'
                     src={user?.photoURL}
