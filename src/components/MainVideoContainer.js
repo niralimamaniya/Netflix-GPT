@@ -9,12 +9,13 @@ const MainVideoContainer = () => {
     if(!movies) return;
 
     const mainMovie = movies[0];
+    console.log(mainMovie);
 
-    const {original_title, overview , id } = mainMovie;
+    const {original_title, overview , id, poster_path } = mainMovie;
 
     return (
         <div className="">
-            <VideoDetails title={original_title} description={overview}/>
+            <VideoDetails title={original_title} description={overview} imageID={poster_path}/>
             <VideoBackground movieId={id}/>
             {/* <img src={mainMovie?.poster_path} alt="movie-logo"></img> */}
         </div>

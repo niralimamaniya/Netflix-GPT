@@ -11,4 +11,11 @@ export const API_OPTIONS = {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZjdlNWY0NjBkNDA0Y2FmNjJmNDY5YjU2Y2IwNWY5ZSIsInN1YiI6IjY1OWE5YTVkN2Q1NTA0MDIwMzBiMmQ0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ermfQFXwltdnuiqylLt9LoW7CcM_4rY5VKhcMvrYH10'
     }
-  };
+};
+
+export const NOW_PLAYING_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/now_playing?&page=1";
+export const POPULAR_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/popular?&page=1";
+export const TOP_RATED_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/top_rated?&page=1";
+export const UPCOMING_MOVIES_API_URL = "https://api.themoviedb.org/3/movie/upcoming?&page=1";
+
+export const MOVIE_IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
