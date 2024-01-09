@@ -16,8 +16,10 @@ const Login = () => {
     const email = useRef(null);
     const password = useRef(null);
     const name = useRef(null);
+    const formData = useRef();
     
     const handleValidation = () => {
+
         
         const message = isDataValid(email.current.value,password.current.value);
         setErrorMessage(message);
@@ -66,6 +68,7 @@ const Login = () => {
                     setErrorMessage(errorCode+": "+errorMessage);
                 });
         }
+        formData.current.reset();
     }
 
     const toggleToSignUpForm = () => {
@@ -86,7 +89,7 @@ const Login = () => {
                 </img>  
             </div>
             <div className='bg-black bg-opacity-70 absolute top-24 left-1/3 w-1/3 py-14 px-[68px] rounded-md'>
-                <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="flex flex-col gap-4" ref={formData} onSubmit={(e) => e.preventDefault()}>
                     <span className='text-white text-3xl font-medium mb-5'>
                         {isSignIn ? "Sign In" : "Sign Up"}
                     </span>

@@ -12,10 +12,12 @@ const SearchBar = () => {
 
     const langKey = useSelector((store) => store?.language.lang);
     const searchText = useRef(null);
+    const formData = useRef();
 
     const searchMovies = async (movie) => {
         const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&page=1",API_OPTIONS);
         const json = await data.json();
+        console.log(json.results);
         return json.results;
     }
 
@@ -26,6 +28,8 @@ const SearchBar = () => {
             messages: [{ role: 'user', content: gptQuery }],
             model: 'gpt-3.5-turbo',
         });
+
+        formData.current.reset();
 
         if(!gptResults.choices) return null;
 
@@ -47,7 +51,10 @@ const SearchBar = () => {
                     <h1 className="text-5xl text-white font-bold py-2">Let AI be your Movie Guru!</h1>
                     <h1 className="text-xl text-gray-400 py-2">Discover Family-Friendly Flicks for a Perfect Movie Night</h1>
                 </div>
-                <form className="grid grid-flow-col gap-3 pt-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="grid grid-flow-col gap-3 pt-4" 
+                    onSubmit={(e) => e.preventDefault()}
+                    ref={formData}
+                >
                     <input 
                         className="py-4 px-5 col-span-11 rounded-md bg-zinc-700 text-white focus:outline-none focus:text-white"
                         type="text"
@@ -61,7 +68,7 @@ const SearchBar = () => {
                 </form>
                 <p className='text-xs mt-1 text-gray-400'>
                     Note: Movie recommendations powered by GPT are available on request due to paid APIs.
-                    <span className='ml-2 text-sm hover:text-gray-200 underline'>Request now</span>
+                    <span className='ml-2 text-sm hover:text-gray-200 underline cursor-pointer'>Request now</span>
                 </p>
             </div>
     )
